@@ -27,6 +27,14 @@ body {
   min-height: 100vh;
 }
 
+p {
+  font-weight: 600;
+  letter-spacing: 0.01px;
+  text-transform: uppercase;
+  color: #e1e1e6;
+  padding-right: .3rem;
+}
+
 .flex {
   display: flex;
 }
