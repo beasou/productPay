@@ -88,6 +88,7 @@ cardHolder.addEventListener("input", () => {
     const ccHolder = document.querySelector(".cc-holder .value")
     ccHolder.innerText = cardHolder.value.length === 0 ? "FULANO DA SILVA" : cardHolder.value
 })
+
 securityCodeMasked.on("accept", () => {
     updateSecurityCode(securityCodeMasked.value)
 })
@@ -97,6 +98,8 @@ function updateSecurityCode(code){
 }
 
 cardNumberMasked.on("accept", () => {
+    const cardType = cardNumberMasked.masked.currentMask.cardType
+    setCardType(cardType)
     updateCardNumber(cardNumberMasked.value)
 })
 function updateCardNumber(number){
