@@ -9,16 +9,16 @@ function setCardType(type){
     const colors = {
         "visa": ["#436D99","#2D57F2"],
         "mastercard": ["#C69347", "#EB5757"],
-        "dinersclubinternational": ["#234B8D", "#BDBDBD"],
-        "mastercardcircus": ["#234B8D","#0099DF"],
+        "diners": ["#234B8D", "#BDBDBD"],
+        "american-express":["#3B4095", "#6CB35E"],
+        "maestro":["#3A9BD9", "#CC2131"],
         "default":["black", "gray"]
+
     }
     ccBgColor01.setAttribute("fill", colors[type][0])
     ccBgColor02.setAttribute("fill", colors[type][1])
     ccLogo.setAttribute("src", `cc-${type}.svg`)
 }
-
-globalThis.setCardType = setCardType
 
 const securityCode = document.querySelector('#security-code')
 const securityCodePattern ={
@@ -58,6 +58,21 @@ const cardNumberPattern = {
             cardType: "mastercard",
         },
         {
+            mask: '0000 000000 0000',
+            regex: /^3(?:0([0-5]|9)|[689]\d?)\d{0,11}/,
+            cardtype: "diners",
+        },
+        {
+            mask: '0000 000000 00000',
+            regex: /^3[47]\d{0,13}/,
+            cardtype: "american-express",
+        },
+        {
+            mask: '0000 0000 0000 0000',
+            regex: /^(?:5[0678]\d{0,2}|6304|67\d{0,2})\d{0,12}/,
+            cardtype: "maestro",
+        },
+        {
             mask: "0000 0000 0000 0000",
             cardType: "default",
         },
@@ -68,8 +83,6 @@ const cardNumberPattern = {
         const foundMask = dynamicMasked.compiledMasks.find(function (item){
             return number.match(item.regex)
         })
-
-        console.log(foundMask)
         return foundMask
     }
 }
